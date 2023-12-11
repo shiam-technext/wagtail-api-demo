@@ -22,6 +22,7 @@ class HomePage(Page):
 
 class BlogPage(Page):
     blog_title = models.CharField(max_length=255)
+    sub_title = models.CharField(max_length=255)
     image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, null=True)
     content = RichTextField()
 
@@ -35,6 +36,7 @@ class BlogPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('blog_title'),
+        FieldPanel('sub_title'),
         FieldPanel('image'),
         FieldPanel('content'),
     ]
@@ -42,6 +44,7 @@ class BlogPage(Page):
     # Export fields over the API
     api_fields = [
         APIField('h1_text'),
+        APIField('sub_title'),
         APIField('cover_image', serializer=ImageSerializedField()),
         APIField('content'),
     ]
